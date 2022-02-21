@@ -1,0 +1,437 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La Food Box{% endblock %}
+{% block robot %}index, nofollow{% endblock %}
+{% block body %}
+
+    <header class="navbar-header">
+    <div>
+    <a title="Accueil" href="#accueil"><img src="./images/logo.png" alt=""></a>
+    </div>
+    <div
+      aria-controls="navbar-links"
+      aria-expanded="false"
+      class="mobile-nav-toggle"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="50"
+        height="50"
+        viewBox="0 0 200 200"
+      >
+        <g stroke-width="6.5" stroke-linecap="round">
+          <path
+            d="M72 82.286h28.75"
+            fill="#009100"
+            fill-rule="evenodd"
+            stroke="#fff"
+          />
+          <path
+            d="M100.75 103.714l72.482-.143c.043 39.398-32.284 71.434-72.16 71.434-39.878 0-72.204-32.036-72.204-71.554"
+            fill="none"
+            stroke="#fff"
+          />
+          <path
+            d="M72 125.143h28.75"
+            fill="#009100"
+            fill-rule="evenodd"
+            stroke="#fff"
+          />
+          <path
+            d="M100.75 103.714l-71.908-.143c.026-39.638 32.352-71.674 72.23-71.674 39.876 0 72.203 32.036 72.203 71.554"
+            fill="none"
+            stroke="#fff"
+          />
+          <path
+            d="M100.75 82.286h28.75"
+            fill="#009100"
+            fill-rule="evenodd"
+            stroke="#fff"
+          />
+          <path
+            d="M100.75 125.143h28.75"
+            fill="#009100"
+            fill-rule="evenodd"
+            stroke="#fff"
+          />
+        </g>
+      </svg>
+    </div>
+    <nav id="navbar-links" class="navbar-links" data-visible="false">
+      <ul>
+        <li><a title="Présentation" class="links" href="#presentation">Présentation</a></li>
+        <li>
+            <a title="Nos menus" class="links" href="#menu">Menu</a>
+        </li>
+        <li>
+          <a title="Galerie photos" class="links" href="#galerie">Galerie</a>
+        </li>
+        <li>
+          <a title="Nous contacter" class="links" href="#coordonnes">Contact</a>
+        </li>
+      </ul>
+    </nav>
+    </header>
+
+    <!-- Image d'acceuil -->
+    <section id="accueil">
+        <div>
+            <p>Bienvenue chez la Food Box</p>
+        </div>
+        <a title="Présentation" href="#presentation" class="middle">
+            <div class="mouse">
+          
+            </div>
+        </a>
+    </section>
+
+        <!-- Section Présentation -->
+    {% for accueil in accueils %}
+    <section id="presentation">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 preimage">
+                    <img class="devanture" src="./uploads/{{ accueil.image }}" alt="">
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="texte">
+                        <div>
+                            <h1>{{ accueil.titre }}</h1>
+                            {{ accueil.content | raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+    <!-- Section Menu -->
+
+    <section id="menu">
+        <div class="container">
+            <h1>Découvrez notre menu</h1>
+            <ul class="nav nav-pills mb-3 d-flex justify-content-center" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="pills-entrees-tab" data-bs-toggle="pill" data-bs-target="#pills-entrees" type="button" role="tab" aria-controls="pills-entrees" aria-selected="true">Entrées</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-pates-tab" data-bs-toggle="pill" data-bs-target="#pills-pates" type="button" role="tab" aria-controls="pills-pates" aria-selected="false">Pâtes</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-specialites-tab" data-bs-toggle="pill" data-bs-target="#pills-specialites" type="button" role="tab" aria-controls="pills-specialites" aria-selected="false">Spécialités</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-sandwich-tab" data-bs-toggle="pill" data-bs-target="#pills-sandwich" type="button" role="tab" aria-controls="pills-sandwich" aria-selected="false">Sandwichs</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-dessert-tab" data-bs-toggle="pill" data-bs-target="#pills-dessert" type="button" role="tab" aria-controls="pills-dessert" aria-selected="false">Desserts</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+
+                <!-- Menu entrées -->
+
+                <div class="tab-pane fade show active" id="pills-entrees" role="tabpanel" aria-labelledby="pills-entrees-tab">
+                    <div id="menuEntrees" class="row">
+                        {% for produit in produits %}
+                        {% if produit.produitCategorie == "Entrées"%}
+                        <div class="col-12 col-md-6">
+                            <div class="produits">
+                                <div>
+                                    <img class="imgproduits" src="./uploads/{{ produit.image }}" alt="">
+                                </div>
+                                <div class="txtproduits">
+                                <h2>
+                                    {{produit.name}}
+                                </h2>
+                                <p>
+                                {% if produit.content != ""%}
+                                    {{produit.content | raw}}
+                                {% endif %}
+                                </p>
+                                </div>
+                                <div class="prix">
+                                    {% if produit.price != ""%}
+                                    {{(produit.price / 100)|number_format(2, ',', '.')  }}€
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Menu pâtes -->
+
+                <div class="tab-pane fade" id="pills-pates" role="tabpanel" aria-labelledby="pills-pates-tab">
+                    <div id="menuPates" class="row">
+                    {% for produit in produits %}
+                        {% if produit.produitCategorie == "Pâtes"%}
+                        <div class="col-12 col-md-6">
+                            <div class="produits">
+                                <div>
+                                    <img class="imgproduits" src="./uploads/{{ produit.image }}" alt="">
+                                </div>
+                                <div class="txtproduits">
+                                <h2>
+                                    {{produit.name}}
+                                </h2>
+                                <p>
+                                {% if produit.content != ""%}
+                                    {{produit.content | raw}}
+                                {% endif %}
+                                </p>
+                                </div>
+                                <div class="prix">
+                                    {% if produit.price != ""%}
+                                    {{(produit.price / 100)|number_format(2, ',', '.')  }}€
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Menu spécialitées -->
+
+                <div class="tab-pane fade" id="pills-specialites" role="tabpanel" aria-labelledby="pills-specialites-tab">
+                    <div id="menuSpecialites" class="row">
+                        {% for produit in produits %}
+                            {% if produit.produitCategorie == "Spécialités"%}
+                            <div class="col-12 col-md-6">
+                                <div class="produits">
+                                    <div>
+                                        {% if produit.image != ""%}
+                                        <img class="imgproduits" src="./uploads/{{ produit.image }}" alt="">
+                                        {% endif %}
+                                    </div>
+                                    <div class="txtproduits">
+                                    <h2>
+                                        {{produit.name}}
+                                    </h2>
+                                    <p>
+                                    {% if produit.content != ""%}
+                                        {{produit.content | raw}}
+                                    {% endif %}
+                                    </p>
+                                    </div>
+                                    <div class="prix">
+                                        {% if produit.price != ""%}
+                                        {{(produit.price / 100)|number_format(2, ',', '.')  }}€
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Menu sandwich -->
+
+                <div class="tab-pane fade" id="pills-sandwich" role="tabpanel" aria-labelledby="pills-sandwich-tab">
+                    <div id="menuSandwichs" class="row">
+                        {% for produit in produits %}
+                            {% if produit.produitCategorie == "Sandwichs"%}
+                            <div class="col-12 col-md-6">
+                                <div class="produits">
+                                    <div>
+                                        {% if produit.image != ""%}
+                                        <img class="imgproduits" src="./uploads/{{ produit.image }}" alt="">
+                                        {% endif %}
+                                    </div>
+                                    <div class="txtproduits">
+                                    <h2>
+                                        {{produit.name}}
+                                    </h2>
+                                    <p>
+                                    {% if produit.content != ""%}
+                                        {{produit.content | raw}}
+                                    {% endif %}
+                                    </p>
+                                    </div>
+                                    <div class="prix">
+                                        {% if produit.price != ""%}
+                                        {{(produit.price / 100)|number_format(2, ',', '.')  }}€
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Menu Desserts -->
+
+                <div class="tab-pane fade" id="pills-dessert" role="tabpanel" aria-labelledby="pills-dessert-tab">
+                    <div id="menuDesserts" class="row">
+                        {% for produit in produits %}
+                            {% if produit.produitCategorie == "Desserts"%}
+                            <div class="col-12 col-md-6">
+                                <div class="produits">
+                                    <div>
+                                        {% if produit.image != ""%}
+                                            <img class="imgproduits" src="./uploads/{{ produit.image }}" alt="">
+                                        {% endif %}
+                                    </div>
+                                    <div class="txtproduits">
+                                    <h2>
+                                        {{produit.name}}
+                                    </h2>
+                                    <p>
+                                        {% if produit.content != ""%}
+                                            {{produit.content | raw}}
+                                        {% endif %}
+                                    </p>
+                                    </div>
+                                    <div class="prix">
+                                        {% if produit.price != ""%}
+                                            {{(produit.price / 100)|number_format(2, ',', '.')  }}€
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Galerie Photos -->
+
+    <section id="galerie">
+        <div class="container">
+            <h1>Galerie photos</h1>
+            <div id="galeriePhotos" class="row">
+            {% for galerie in galeries %}
+                {% if galerie.image != ""%}
+                <div class="col-6 col-md-3">
+                    <div class="contentGalerie">
+                        <a href="#" rel="noopener noreferrer" data-bs-toggle="modal" data-bs-target="#galerie{{ galerie.id }}" class="txtgalerie">
+                            <img class="imgGalerie" src="./uploads/{{ galerie.image }}" alt="{{ galerie.titre }}">
+                            <div class="hoverGalerie">
+                                <p>
+                                    {{ galerie.titre }}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="modal fade" id="galerie{{ galerie.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">
+                                        {{ galerie.titre }}
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img class="imgModal" src="./uploads/{{ galerie.image }}" alt="{{ galerie.titre }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Section coordonnées -->
+
+    <section id="coordonnes">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="content-contact">
+                        <h1>Nous contacter</h1>
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <div class="txtcontact">
+                                    <h2>Horaires d'ouverture :</h2>
+                                    <p>
+                                        Du Mardi au Dimanche de 11h à 22h30* <br>
+                                        <span>*Les horaires peuvent varier, renseignez-vous par téléphone</span>
+                                    </p>
+                                </div>
+                                <div class="txtcontact">
+                                    <h2>Téléphone :</h2>
+                                    <p>
+                                        07 86 61 70 64
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="txtcontact">
+                                    <h2>Adresse :</h2>
+                                    <p>
+                                        12 Avenue Général Sarrail <br>
+                                        01500 Ambérieu-en-Bugey
+                                    </p>
+                                </div>
+                                <div class="txtcontact">
+                                    <h2>Réseaux sociaux :</h2>
+                                    <a title="Page Facebook FoodBox" rel="noopener noreferrer" target="_blank" href="https://fr-fr.facebook.com/pages/category/Restaurant/Food-Box-998361743547413/">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="GoogleMapsPerso">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+    <footer id="footer">
+        <div class="container">
+            <div class="google">
+                <a  title="Page avis google" rel="noopener noreferrer" target="_blank" href="https://www.google.com/search?q=la+food+box&source=hp&ei=O6LQYK7DA_yPjLsPpu6EgAg&iflsig=AINFCbYAAAAAYNCwS3464rp9leNwoXvPi-_EpI2-E3hp&gs_ssp=eJzj4tVP1zc0TDPJSalIK8gxYLRSNagwMbdIMjW0SDQ2N08xN7JIsgIKpaQkGyRbpJhappiaGxgZeXHnJCqk5eenKCTlVwAAgVMTPA&oq=la+foo&gs_lcp=Cgdnd3Mtd2l6EAEYAzIECAAQQzICCAAyCAguEMcBEK8BMgoILhDHARCvARBDMgoIABCxAxCDARAKMggILhDHARCvATICCAAyAggAMgQIABAKMgQIABAKOggIABCxAxCDAToECC4QQzoOCC4QsQMQxwEQowIQkwI6BQgAELEDOgsILhCxAxDHARCjAjoOCC4QsQMQgwEQxwEQowI6AgguOggILhDHARCjAjoLCAAQsQMQgwEQyQNQ2RxY9zBgpztoAnAAeACAAagDiAGcEpIBBzItMi40LjGYAQCgAQGqAQdnd3Mtd2l6sAEA&sclient=gws-wiz#lrd=0x478b518a377d728b:0x4ddc0c8d59d57022,1,,,&wptab=s:H4sIAAAAAAAAAONgVuLVT9c3NEwzyUmpSCvIecTozS3w8sc9YSmnSWtOXmO04eIKzsgvd80rySypFNLjYoOyVLgEpVB1ajBI8XOhCvHsYuL3yU9OzAnIzwxKLctMLS9exGqek6iQlp-fopCUX6FQlFpcklhalFiSmZ-nUJRYkJmSqpCYm3R4ZVFmaqluap5uUml6aqVCYllmMQAhBafiqwAAAA">
+                    <p>Avis google</p>
+                    <img src="./images/etoiles.jpg" alt="">
+                </a>
+            </div>
+
+            <div class="mentions">
+                <button title="Mentions Légales" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Mentions Légales
+                  </button>
+            </div>
+
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body">
+                <span>Informations légales</span>  <br>
+                La-Food-Box.fr <br>
+                TEBIBI Nora <br>
+                Adresse: 12 Avenue Général Sarrail, 01500 Ambérieu-en-Bugey<br>
+                Téléphone: 07 86 61 70 64 <br> 
+                Mail: nora01500@gmail.com <br>
+                Numéro RCS: Bourg-en-Bresse A 811 624 642 <br>
+                Siret 811 624 642 00013 <br>
+                APE 5610 C <br><br>
+                <span>Hébergeur</span> <br>
+                Le site www.la-food-box.fr est hébergé par : <br>
+
+                <a class="ml" title="Page hostinger" rel="noopener noreferrer" target="_blank" href="https://www.hostinger.fr/">Hostinger.fr</a>
+
+              </div>
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}

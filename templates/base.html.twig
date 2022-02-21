@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="La Food Box est un restaurant situé à Ambérieu-en-Bugey vous proposant des plats orientaux et Halal ainsi que de multiples plats à emporter.">
+        <meta name="keywords" content="La Food Box Ambérieu-en-Bugey, La Food Box, FoodBox, Restaurant Ambérieu-en-Bugey, Restaurant amberieu, La FoodBox, Restaurant gare amberieu, sandwich, pates, nourriture orientale, desserts, gare sncf amberieu restaurant, restaurant terrasse, restaurant terrasse amberieu, Ambérieu-en-Bugey,La Food Box Restauration Rapide,la food box amberieu en bugey, manger a la gare, manger en terrasse, halal">
+        <meta name="robots" content="{% block robot %}noindex, nofollow{% endblock %}" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="images/500x500.png">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            <script type="text/javascript" src="./tarteaucitron.js-1.9.1/tarteaucitron.js"></script>
+
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+    </body>
+</html>
