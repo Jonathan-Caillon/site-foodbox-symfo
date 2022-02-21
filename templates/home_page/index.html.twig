@@ -345,6 +345,7 @@
     </section>
 
     <!-- Section coordonnées -->
+    {% for contact in contacts %}
 
     <section id="coordonnes">
         <div class="container">
@@ -356,25 +357,17 @@
                             <div class="col-12 col-lg-6">
                                 <div class="txtcontact">
                                     <h2>Horaires d'ouverture :</h2>
-                                    <p>
-                                        Du Mardi au Dimanche de 11h à 22h30* <br>
-                                        <span>*Les horaires peuvent varier, renseignez-vous par téléphone</span>
-                                    </p>
+                                        {{ contact.horaire | raw }}
                                 </div>
                                 <div class="txtcontact">
                                     <h2>Téléphone :</h2>
-                                    <p>
-                                        07 86 61 70 64
-                                    </p>
+                                        {{ contact.tel | raw }}
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="txtcontact">
                                     <h2>Adresse :</h2>
-                                    <p>
-                                        12 Avenue Général Sarrail <br>
-                                        01500 Ambérieu-en-Bugey
-                                    </p>
+                                        {{ contact.adresse | raw }}
                                 </div>
                                 <div class="txtcontact">
                                     <h2>Réseaux sociaux :</h2>
@@ -385,8 +378,9 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
+            {% endfor %}
+
                 <div class="col-12 col-lg-6">
                     <div class="GoogleMapsPerso">
                         
@@ -395,7 +389,6 @@
             </div>
         </div>
     </section>
-
     <!-- Footer -->
 
     <footer id="footer">
