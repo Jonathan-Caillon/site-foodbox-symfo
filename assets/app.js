@@ -92,8 +92,6 @@ navToggle.addEventListener("click", () => {
 });
 const navbar = document.querySelector(".navbar-header");
 
-console.log(navbar);
-
 function scrollFunction() {
   if (
     document.body.scrollTop > 200 ||
